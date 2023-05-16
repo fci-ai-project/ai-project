@@ -96,7 +96,6 @@ diagonals(Board, Diagonals) :-
 */
 
 horizontal_winner([Row | _], Winner) :-
-    write(Row),nl,
     replicate(Winner, 4, Winners),
     my_subset(Winners, Row),
     \+(empty_cell(Winner)),
