@@ -84,13 +84,13 @@ diagonals(Board, Diagonals) :-
     Columns1 is Columns - 1,
     length(Board, Rows),
     Rows1 is Rows - 1,
-    findall([0, X], between(0, Columns1, X), StartingPoints1), /% column [0,1,2] representing-> (0,0),(0,1),(0,2)
-    findall([X, 0], between(1, Rows1, X), StartingPoints2), /% rows [1,2] representing-> (1,0),(2,0)
-    append(StartingPoints1, StartingPoints2, StartingPoints), /% [0,1,2,1,2]
-    maplist(diagonal(Board), StartingPoints, NormalDiagonals),/% call(diagonal, Board, StartingPoints) -> returns diagonals of normal board.
-    reverse(Board, ReversedBoard), /% reverses elements in lists inside of matrix list
-    maplist(diagonal(ReversedBoard), StartingPoints, AntiDiagonals), /% gets diagonals of reverse board
-    append(NormalDiagonals, AntiDiagonals, Diagonals)./% element would look like [[#,r,r,b]]
+    findall([0, X], between(0, Columns1, X), StartingPoints1), /* column [0,1,2] representing-> (0,0),(0,1),(0,2)*/
+    findall([X, 0], between(1, Rows1, X), StartingPoints2), /* rows [1,2] representing-> (1,0),(2,0) */
+    append(StartingPoints1, StartingPoints2, StartingPoints), /* [0,1,2,1,2] */
+    maplist(diagonal(Board), StartingPoints, NormalDiagonals),/*call(diagonal, Board, StartingPoints) -> returns diagonals of normal board.*/
+    reverse(Board, ReversedBoard), /* reverses elements in lists inside of matrix list*/
+    maplist(diagonal(ReversedBoard), StartingPoints, AntiDiagonals), /* gets diagonals of reverse board */
+    append(NormalDiagonals, AntiDiagonals, Diagonals)./* element would look like [[#,r,r,b]]*/
 
 
 /*
