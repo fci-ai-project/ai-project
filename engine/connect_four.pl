@@ -95,31 +95,33 @@ diagonals(Board, Diagonals) :-
     If the board is full, the it is a tie
 */
 
-horizontal_winner([Row | _], Winner) :-
-    replicate(Winner, 4, Winners),
+horizontal_winner(WinningFactor, [Row | _], Winner) :-
+    replicate(Winner, WinningFactor, Winners),
     my_subset(Winners, Row),
     \+(empty_cell(Winner)),
     !.
 
-horizontal_winner([_ | Board], Winner) :-
-    horizontal_winner(Board, Winner).
+horizontal_winner(WinningFactor, [_ | Board], Winner) :-
+    horizontal_winner(WinningFactor, Board, Winner).
 
-vertical_winner(Board, Winner) :-
+vertical_winner(WinningFactor, Board, Winner) :-
     transpose(Board, Transposed),
-    horizontal_winner(Transposed, Winner).
+    horizontal_winner(WinningFactor, Transposed, Winner).
 
-diagonal_winner(Board, Winner) :-
+diagonal_winner(WinningFactor, Board, Winner) :-
     diagonals(Board, Diagonals),
-    horizontal_winner(Diagonals, Winner).
+    horizontal_winner(WinningFactor, Diagonals, Winner).
 
-winner(Board, Winner) :- horizontal_winner(Board, Winner), !.
-winner(Board, Winner) :- vertical_winner(Board, Winner), !.
-winner(Board, Winner) :- diagonal_winner(Board, Winner), !.
-winner(Board, tie) :-
+winner(WinningFactor, Board, Winner) :- horizontal_winner(WinningFactor, Board, Winner), !.
+winner(WinningFactor, Board, Winner) :- vertical_winner(WinningFactor, Board, Winner), !.
+winner(WinningFactor, Board, Winner) :- diagonal_winner(WinningFactor, Board, Winner), !.
+winner(_, Board, tie) :-
     \+((
         get_cell(_, _, Board, Cell),
         empty_cell(Cell)
     )).
+
+state_util(WinningFactor, _{ perform_move: place_piece, check_winner: winner(WinningFactor) }).
 
 /*
     Check vertical winner (blue)

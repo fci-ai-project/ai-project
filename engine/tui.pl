@@ -19,10 +19,7 @@ main(Winner) :-
         human: Blue,
         computer: Red
     },
-    StateUtil = _{
-        perform_move: place_piece,
-        check_winner: winner
-    },
+    state_util(4, StateUtil),
     IOUtil = _{
         get_move: get_move,
         announce_winner: announce_winner,
