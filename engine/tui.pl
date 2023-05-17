@@ -11,6 +11,9 @@ announce_state([X | Xs]) :-
 announce_winner(X) :-
     write("The winner is "), write(X), nl.
 
+announce_invalid_move(Move) :-
+    write("Invalid move: "), write(Move), nl.
+
 main(Winner) :-
     form_board(6, 7, Board),
     blue_piece(Blue),
@@ -23,6 +26,7 @@ main(Winner) :-
     IOUtil = _{
         get_move: get_move,
         announce_winner: announce_winner,
-        announce_state: announce_state
+        announce_state: announce_state,
+        announce_invalid_move: announce_invalid_move
     },
     play(Board, human, Players, StateUtil, IOUtil, Winner).
