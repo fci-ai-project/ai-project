@@ -1,4 +1,4 @@
-:- [connect_four].
+:- [connect_n].
 :- [game].
 
 get_move(X) :-
