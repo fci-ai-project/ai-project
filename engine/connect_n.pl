@@ -20,6 +20,7 @@ form_board(R, C, [X | Xs]) :-
     form_board(R1, C, Xs).
 
 
+
 get_cell(R, C, Board, Cell) :-
     nth0(R, Board, TargetRow),
     nth0(C, TargetRow, Cell).
@@ -27,6 +28,8 @@ get_cell(R, C, Board, Cell) :-
 /*
     - Start at bottom
     - Once empty cell found, insert
+    - R -> number of rows in the matrix.
+    - C -> the column to insert in.
 */
 place_piece(Piece, R, C, Board, NewBoard) :-
     get_cell(R, C, Board, Cell), % TODO: optimize to use accumulator instead of getting the cell each time
@@ -35,11 +38,13 @@ place_piece(Piece, R, C, Board, NewBoard) :-
     R1 is R - 1,
     place_piece(Piece, R1, C, Board, NewBoard).
 
+/*  - Empty cell found */
 place_piece(Piece, R, C, Board, NewBoard) :-
     nth0(R, Board, TargetRow),
     replace_at(C, TargetRow, Piece, NewRow),
     replace_at(R, Board, NewRow, NewBoard).
 
+/* - Interface for user (the function that gets called initially)*/
 place_piece(Piece, C, Board, NewBoard) :-
     length(Board, Length),
     R is Length - 1,
@@ -61,10 +66,14 @@ diagonal(Board, [R, C], [D | Ds]) :-
     diagonal(Board, [R1, C1], Ds).
 
 /*
-    1 2 3
-    4 5 6
-    7 8 9
-
+               
+    row 0    1 2 3
+    row 1    4 5 6
+    row 2    7 8 9
+reversed version:
+    row 0    3 2 1
+    row 1    6 5 4
+    row 2    9 8 7
     Starting points for diagonals
     (0, 0), (0, 1), (0, 2)
     (1, 0), (2, 0)
@@ -75,13 +84,13 @@ diagonals(Board, Diagonals) :-
     Columns1 is Columns - 1,
     length(Board, Rows),
     Rows1 is Rows - 1,
-    findall([0, X], between(0, Columns1, X), StartingPoints1),
-    findall([X, 0], between(1, Rows1, X), StartingPoints2),
-    append(StartingPoints1, StartingPoints2, StartingPoints),
-    maplist(diagonal(Board), StartingPoints, NormalDiagonals),
-    reverse(Board, ReversedBoard),
-    maplist(diagonal(ReversedBoard), StartingPoints, AntiDiagonals),
-    append(NormalDiagonals, AntiDiagonals, Diagonals).
+    findall([0, X], between(0, Columns1, X), StartingPoints1), /% column [0,1,2] representing-> (0,0),(0,1),(0,2)
+    findall([X, 0], between(1, Rows1, X), StartingPoints2), /% rows [1,2] representing-> (1,0),(2,0)
+    append(StartingPoints1, StartingPoints2, StartingPoints), /% [0,1,2,1,2]
+    maplist(diagonal(Board), StartingPoints, NormalDiagonals),/% call(diagonal, Board, StartingPoints) -> returns diagonals of normal board.
+    reverse(Board, ReversedBoard), /% reverses elements in lists inside of matrix list
+    maplist(diagonal(ReversedBoard), StartingPoints, AntiDiagonals), /% gets diagonals of reverse board
+    append(NormalDiagonals, AntiDiagonals, Diagonals)./% element would look like [[#,r,r,b]]
 
 
 /*
@@ -92,13 +101,13 @@ diagonals(Board, Diagonals) :-
     or the bottom of the piece is three of the same piece
     then this piece is a winner
 
-    If the board is full, the it is a tie
+    If the board is full, then it is a tie
 */
 
 horizontal_winner(WinningFactor, [Row | _], Winner) :-
     replicate(Winner, WinningFactor, Winners),
     my_subset(Winners, Row),
-    \+(empty_cell(Winner)),
+    \+(empty_cell(Winner)), 
     !.
 
 horizontal_winner(WinningFactor, [_ | Board], Winner) :-

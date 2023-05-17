@@ -1,7 +1,7 @@
 :- [connect_n].
 :- [game].
-
-get_move(X) :-
+/% edited get move to allow usage of minimax algo
+get_move(State, X) :-
     read(X).
 
 announce_state([]).
