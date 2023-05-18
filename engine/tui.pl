@@ -18,19 +18,19 @@ announce_invalid_move(Move) :-
     write("Invalid move: "), write(Move), nl.
 
 main(Winner) :-
-    form_board(3, 3, Board),
+    form_board(4, 4, Board),
     blue_piece(Blue),
     red_piece(Red),
     Players = _{
         human: Blue,
         computer: Red
     },
-    state_util(3, StateUtil),
+    state_util(4, StateUtil),
     IOUtil = _{
         get_move: get_move,
         announce_winner: announce_winner,
         announce_state: announce_state,
         announce_invalid_move: announce_invalid_move
     },
-    minimax_algo_util(StateUtil, AlgoUtil),
+    abp_algo_util(StateUtil, AlgoUtil),
     play(Board, human, Players, StateUtil, IOUtil, AlgoUtil, Winner).
