@@ -1,3 +1,4 @@
+:- [search].
 /*
     The main loop of the game
     Ends when a winner is determined
@@ -10,18 +11,19 @@
     }
 
     IOUtil: {
-        get_move: fn(Move),
-        announce_winner: fn(Winner),
-        announce_state: fn(State),
-        announce_invalid_move: fn(move),
+        get_move: pred(Move),
+        announce_winner: pred(Winner),
+        announce_state: pred(State),
+        announce_invalid_move: pred(move),
     }
 
     StateUtil: {
-        perform_move: fn(Player, Move, State, NewState),
-        check_winner: fn(State, Winner)
+        perform_move: pred(Player, Move, State, NewState),
+        check_winner: pred(State, Winner),
+        switch_player: pred(Player, NewPlayer)
     }
 
-    play(State, Turn, Players, StateUtil, IOUtil, Winner)
+    play(State, Turn, Players, StateUtil, IOUtil, AlgoUtil, Winner)
     Turn: human | computer
 */
 
@@ -36,7 +38,7 @@ perform_valid_move(Turn, Player, Move, State, PerformMove, _, NewTurn, NewState)
 perform_valid_move(Turn, _, Move, State, _, AnnounceInvalidMove, Turn, State) :-
     call(AnnounceInvalidMove, Move).
 
-play(State, _, _, StateUtil, IOUtil, Winner) :-
+play(State, _, _, StateUtil, IOUtil, _, Winner) :-
     CheckWinner = StateUtil.check_winner,
     call(CheckWinner, State, Winner),
     !,
@@ -45,7 +47,7 @@ play(State, _, _, StateUtil, IOUtil, Winner) :-
     Announce = IOUtil.announce_winner,
     call(Announce, Winner).
 
-play(State, Turn, Players, StateUtil, IOUtil, Winner) :-
+play(State, Turn, Players, StateUtil, IOUtil, AlgoUtil, Winner) :-
     Turn = human,
     !,
     AnnounceState = IOUtil.announce_state,
@@ -56,17 +58,15 @@ play(State, Turn, Players, StateUtil, IOUtil, Winner) :-
     Player = Players.human,
     AnnounceInvalid = IOUtil.announce_invalid_move,
     perform_valid_move(Turn, Player, Move, State, PerformMove, AnnounceInvalid, NewTurn, NewState),
-    play(NewState, NewTurn, Players, StateUtil, IOUtil, Winner).
+    play(NewState, NewTurn, Players, StateUtil, IOUtil, AlgoUtil, Winner).
 
-play(State, Turn, Players, StateUtil, IOUtil, Winner) :-
+play(State, Turn, Players, StateUtil, IOUtil, AlgoUtil, Winner) :-
     Turn = computer,
     !,
     AnnounceState = IOUtil.announce_state,
     call(AnnounceState, State),
-    GetMove = IOUtil.get_move,
-    call(GetMove, Move),
-    PerformMove = StateUtil.perform_move,
     Player = Players.computer,
-    AnnounceInvalid = IOUtil.announce_invalid_move,
-    perform_valid_move(Turn, Player, Move, State, PerformMove, AnnounceInvalid, NewTurn, NewState),
-    play(NewState, NewTurn, Players, StateUtil, IOUtil, Winner).
+    choose_best_move(AlgoUtil, StateUtil, Player, State, Move),
+    PerformMove = StateUtil.perform_move,
+    call(PerformMove, Player, Move, State, NewState),
+    play(NewState, human, Players, StateUtil, IOUtil, AlgoUtil, Winner).

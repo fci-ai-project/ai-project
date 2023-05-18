@@ -10,6 +10,6 @@ replicate(Char, Number, [Char | List]) :-
     Number1 is Number - 1,
     replicate(Char, Number1, List).
 
-my_subset(Sub, Super) :-        
-    append(_, Super2, Super),  
+my_subset(Sub, Super) :-
+    append(_, Super2, Super),
     append(Sub, _, Super2).
