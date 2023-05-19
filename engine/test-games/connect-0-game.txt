@@ -1,0 +1,28 @@
+main(Winner).
+6.
+7.
+1.
+0.
+2.
+2.
+2.
+
+from this point -> game inputs can be anything
+optional inputs:
+1. (when column 1 is filled)
+
+expected output to optional input -> invalid move 1. 
+
+description:
+- rows -> 6
+- colmuns -> 7
+- human color -> red
+- consecutive pieces to win -> 0
+- algo -> alpha-beta
+- computer depth -> 2
+- human goes first -> yes
+
+result -> The ai fills the columns one by one till game tie.
+       -> Winner = tie
+       -> Winner is tie
+       

@@ -1,0 +1,20 @@
+main(Winner).
+8.
+9.
+1.
+5.
+2.
+10.
+1.
+4.
+
+description:
+- rows -> 8
+- colmuns -> 9
+- human color -> red
+- consecutive pieces to win -> 5
+- algo -> alpha-beta
+- computer depth -> 10
+- human goes first -> Yes.
+
+result -> out of memory error (is this an expected behaviour ?)
