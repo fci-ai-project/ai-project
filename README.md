@@ -9,6 +9,13 @@
 # GitHub repository
 https://github.com/fci-ai-project/ai-project
 
+# Running
+Consult `tui.pl` in `engine/`
+```bash
+cd engine
+swipl -s tui.pl
+```
+
 # Experience article, AI screenshots, performance graphs
 https://fci-ai-project.github.io
 
