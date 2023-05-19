@@ -1,0 +1,48 @@
+Server
+    - Create websocket
+    - On connection
+        - Start the game
+    - If client's turn
+        - Indicate to the client that it is its turn (probably handle in IOUtil.get_move)
+        - Wait to receive the move object from the client (probably handle in IOUtil.get_move)
+        - Perform the move
+        - Send the new state to the client (IOUtil.announce_state)
+        - If invalid move, notify the client (IOUtil.announce_invalid_move)
+    - If computer's turn
+        - Perform the move
+        - Send the new state to the client (IOUtil.announce_state)
+    - If winner found
+        - Announce it
+        - Close connection (IOUtil.announce_winner)
+
+Client
+    - Connect to websocket
+    - Send message containing game configuration
+    - Receive message
+    - If message received indicating its client's turn
+        - Unlock the board
+        - Get move from user
+        - Send move message
+        - Lock the board
+    - If message received indicating invalid move
+        - Notify user
+        - Unlock board
+        - Get move
+        - Send move message
+        - Lock board
+    - If message received indicating new state
+        - Update board
+    - If message received indicating winner
+        - Announce winner
+
+IOUtil
+    - get_move
+        - Notify client that it is its turn
+        - Wait for move object
+    - announce_state
+        - Send new state to client
+    - announce_invalid_move
+        - Notify the client
+    - announce_winner
+        - Send winner object to client
+        - Close connection

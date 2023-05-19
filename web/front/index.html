@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="/assets/index.js" defer></script>
+    <link rel="stylesheet" href="/assets/index.css">
+    <title>Connect-N</title>
+</head>
+
+<body>
+    <h1>Connect-N</h1>
+    <!-- Form for the following:
+        rows: number greater than 0,
+        columns: number greater than 0,
+        color: 'r|b',
+        winning_factor: number greater than 0,
+        algorithm: 'minimax|abp',
+        max_plies: number greater than 0,
+        turn: 'human|computer'
+    -->
+    <form class="form" action="/api/game" method="POST">
+        <label><b>Rows</b></label> <br />
+        <input type="number" name="rows" min="1" required> <br />
+        <label><b>Columns</b></label> <br />
+        <input type="number" name="columns" min="1" required> <br /><br />
+
+        <label><b>Color you would like to play as</b></label> <br />
+        <select name="color" required>
+            <option value="r">Red</option>
+            <option value="b">Blue</option>
+        </select> <br /> <br />
+
+        <label><b>Number of consecutive pieces for winning</b></label> <br />
+        <input type="number" name="winning_factor" min="1" required>
+        <br /><br />
+
+        <label><b>Algorithm</b></label> <br />
+        <select name="algorithm" required>
+            <option value="minimax">Minimax</option>
+            <option value="abp">Alpha-Beta Pruning</option>
+        </select> <br /> <br />
+
+        <label><b>Computer max plies look-ahead</b></label> <br />
+        <input type="number" name="max_plies" min="1" required> <br /> <br />
+
+        <label><b>Who starts first</b></label> <br />
+        <select name="turn" required>
+            <option value="human">Human</option>
+            <option value="computer">Computer</option>
+        </select> <br /> <br />
+        <button type="submit">Start Game</button>
+    </form>
+
+    <div id="gameContainer"></div>
+</body>
+
+</html>
