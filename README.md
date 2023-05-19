@@ -10,10 +10,9 @@
 https://github.com/fci-ai-project/ai-project
 
 # Running
-Consult `tui.pl` in `engine/`
+Consult `main.pl`
 ```bash
-cd engine
-swipl -s tui.pl
+swipl -s main.pl
 ```
 
 # Experience article, AI screenshots, performance graphs
