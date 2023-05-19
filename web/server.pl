@@ -19,10 +19,12 @@ port(2002).
 create_message(Type, Data, _{ data: _{ type: Type, data: Data }, format: json, opcode: text }).
 
 /*
-    Message types: move, state, invalid_move, init
+    Message types: move, state, invalid_move, init, winner, turn
     move data: number
     state data: 2d matrix
     invalid_move data: number
+    winner data: 'r|b|tie'
+    turn data: 'human'
     init data: {
         rows: number greater than 0,
         columns: number greater than 0,
@@ -38,7 +40,7 @@ get_move(WebSocket, Move) :-
     create_message(turn, human, Message),
     ws_send(WebSocket, json(Message)),
     ws_receive(WebSocket, Response, [format(json)]), % TODO: handle socket close
-    Response.data.type = move,
+    Response.data.type = "move",
     Move = Response.data.data.
 
 announce_state(WebSocket, State) :-
