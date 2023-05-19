@@ -100,6 +100,59 @@ diagonals(Board, Diagonals) :-
     If the board is full, the it is a tie
 */
 
+horizontal_winning_line(WinningFactor, Piece, Row, Line) :-
+    replicate_empty(WinningFactor, Line),
+    my_subset(Line, Row),
+    member(Piece, Line),
+    switch_piece(Piece, OppositePiece),
+    \+(member(OppositePiece, Line)).
+
+horizontal_heuristic(_, _, [], 0) :- !.
+horizontal_heuristic(WinningFactor, Piece, [Row | RestBoard], H) :-
+    findall(Line, horizontal_winning_line(WinningFactor, Piece, Row, Line), WinningLines),
+    length(WinningLines, H1),
+    horizontal_heuristic(WinningFactor, Piece, RestBoard, H2),
+    H is H1 + H2.
+
+vertical_heuristic(WinningFactor, Piece, Board, Heuristic) :-
+    transpose(Board, Transposed),
+    horizontal_heuristic(WinningFactor, Piece, Transposed, Heuristic).
+
+diagonal_heuristic(WinningFactor, Piece, Board, Heuristic) :-
+    diagonals(Board, Diagonals),
+    horizontal_heuristic(WinningFactor, Piece, Diagonals, Heuristic).
+
+winning_heuristic(WinningFactor, Piece, Board, Heuristic) :-
+    horizontal_heuristic(WinningFactor, Piece, Board, Hh),
+    vertical_heuristic(WinningFactor, Piece, Board, Vh),
+    diagonal_heuristic(WinningFactor, Piece, Board, Dh),
+    Heuristic is Hh + Vh + Dh.
+
+/*
+    horizontal_winning_line(4, b, [#, #, #, b, #, #], Line).
+*/
+/*
+    form_board(6, 7, Board),
+    blue_piece(Blue),
+    red_piece(Red),
+    place_piece(Blue, 3, Board, Board1),
+    horizontal_heuristic(4, b, Board1, H) ; true. % 4
+*/
+
+/*
+    form_board(6, 7, Board),
+    blue_piece(Blue),
+    red_piece(Red),
+    place_piece(Blue, 3, Board, Board1),
+    place_piece(Blue, 3, Board1, Board2),
+    place_piece(Red, 5, Board2, Board3),
+    horizontal_heuristic(4, b, Board3, Hh),
+    vertical_heuristic(4, b, Board3, Vh),
+    diagonal_heuristic(4, b, Board3, Dh),
+    winning_heuristic(4, b, Board3, Wh),
+    diagonal_heuristic(4, r, Board3, Dhr) ; true.
+*/
+
 horizontal_winner(WinningFactor, [Row | _], Winner) :-
     replicate(Winner, WinningFactor, Winners),
     my_subset(Winners, Row),
@@ -126,13 +179,14 @@ winner(_, Board, tie) :-
         empty_cell(Cell)
     )).
 
-switch_player(Player, NewPlayer) :- red_piece(Player), blue_piece(NewPlayer).
-switch_player(Player, NewPlayer) :- blue_piece(Player), red_piece(NewPlayer).
+switch_piece(Player, NewPlayer) :- red_piece(Player), blue_piece(NewPlayer).
+switch_piece(Player, NewPlayer) :- blue_piece(Player), red_piece(NewPlayer).
 
 state_util(WinningFactor, _{
     perform_move: place_piece,
     check_winner: winner(WinningFactor),
-    switch_player: switch_player
+    switch_player: switch_piece,
+    calculate_heuristic: winning_heuristic(WinningFactor)
 }).
 
 /*

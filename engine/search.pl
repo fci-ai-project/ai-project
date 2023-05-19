@@ -2,7 +2,9 @@
     AlgoUtil: {
         terminal_test: pred(State, Winner),
         utility: pred(State, MaxPlayer, Winner, Value),
-        alpha_beta_violation: pred(Alpha, Beta)
+        alpha_beta_violation: pred(Alpha, Beta),
+        calculate_heuristic: pred(Player, State, Heuristic),
+        max_plies: number
     }
 */
 
@@ -79,36 +81,44 @@ choose_best_move(AlgoUtil, StateUtil, Player, State, Move) :-
     SwitchPlayer = StateUtil.switch_player,
     call(SwitchPlayer, Player, NewPlayer),
     get_max_from_list(
-        min_value(AlgoUtil, StateUtil, Player, NewPlayer), AlgoUtil, (-inf), inf, MovesWithStates, [Move, Value]
+        min_value(0, AlgoUtil, StateUtil, Player, NewPlayer), AlgoUtil, (-inf), inf, MovesWithStates, [Move, Value]
     ),
     write([Move, Value]),nl.
 
-utility_from_terminal(AlgoUtil, MaxPlayer, State, Value) :-
+utility_from_terminal_or_cutoff(_, AlgoUtil, MaxPlayer, State, Value) :-
     TerminalTest = AlgoUtil.terminal_test,
     call(TerminalTest, State, Winner),
+    !,
     Utility = AlgoUtil.utility,
     call(Utility, State, MaxPlayer, Winner, Value).
 
-min_value(AlgoUtil, _, MaxPlayer, _, _, _, [Move, State], [Move, Value]) :-
-    utility_from_terminal(AlgoUtil, MaxPlayer, State, Value), !.
+utility_from_terminal_or_cutoff(Depth, AlgoUtil, MaxPlayer, State, Value) :-
+    Depth >= AlgoUtil.max_plies,
+    CalculateHeuristic = AlgoUtil.calculate_heuristic,
+    call(CalculateHeuristic, MaxPlayer, State, Value).
 
-min_value(AlgoUtil, StateUtil, MaxPlayer, Player, Alpha, Beta, [Move, State], [Move, Value]) :-
+min_value(Depth, AlgoUtil, _, MaxPlayer, _, _, _, [Move, State], [Move, Value]) :-
+    utility_from_terminal_or_cutoff(Depth, AlgoUtil, MaxPlayer, State, Value), !.
+
+min_value(Depth, AlgoUtil, StateUtil, MaxPlayer, Player, Alpha, Beta, [Move, State], [Move, Value]) :-
     PerformMove = StateUtil.perform_move,
     findall([M, NewState], call(PerformMove, Player, M, State, NewState), MovesWithStates),
     SwitchPlayer = StateUtil.switch_player,
     call(SwitchPlayer, Player, NewPlayer),
+    Depth1 is Depth + 1,
     get_min_from_list(
-        max_value(AlgoUtil, StateUtil, MaxPlayer, NewPlayer), AlgoUtil, Alpha, Beta, MovesWithStates, [_, Value]
+        max_value(Depth1, AlgoUtil, StateUtil, MaxPlayer, NewPlayer), AlgoUtil, Alpha, Beta, MovesWithStates, [_, Value]
     ).
 
-max_value(AlgoUtil, _, MaxPlayer, _, _, _, [Move, State], [Move, Value]) :-
-    utility_from_terminal(AlgoUtil, MaxPlayer, State, Value), !.
+max_value(Depth, AlgoUtil, _, MaxPlayer, _, _, _, [Move, State], [Move, Value]) :-
+    utility_from_terminal_or_cutoff(Depth, AlgoUtil, MaxPlayer, State, Value), !.
 
-max_value(AlgoUtil, StateUtil, MaxPlayer, Player, Alpha, Beta, [Move, State], [Move, Value]) :-
+max_value(Depth, AlgoUtil, StateUtil, MaxPlayer, Player, Alpha, Beta, [Move, State], [Move, Value]) :-
     PerformMove = StateUtil.perform_move,
     findall([M, NewState], call(PerformMove, Player, M, State, NewState), MovesWithStates),
     SwitchPlayer = StateUtil.switch_player,
     call(SwitchPlayer, Player, NewPlayer),
+    Depth1 is Depth + 1,
     get_max_from_list(
-        min_value(AlgoUtil, StateUtil, MaxPlayer, NewPlayer), AlgoUtil, Alpha, Beta, MovesWithStates, [_, Value]
+        min_value(Depth1, AlgoUtil, StateUtil, MaxPlayer, NewPlayer), AlgoUtil, Alpha, Beta, MovesWithStates, [_, Value]
     ).

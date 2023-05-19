@@ -20,7 +20,8 @@
     StateUtil: {
         perform_move: pred(Player, Move, State, NewState),
         check_winner: pred(State, Winner),
-        switch_player: pred(Player, NewPlayer)
+        switch_player: pred(Player, NewPlayer),
+        calculate_heuristic: pred(Player, State, Heuristic)
     }
 
     play(State, Turn, Players, StateUtil, IOUtil, AlgoUtil, Winner)

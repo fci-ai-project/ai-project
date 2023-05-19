@@ -1,6 +1,6 @@
 :- [connect_n].
 :- [game].
-:- [minimax].
+:- [algorithms].
 
 get_move(X) :-
     read(X).
@@ -32,5 +32,5 @@ main(Winner) :-
         announce_state: announce_state,
         announce_invalid_move: announce_invalid_move
     },
-    abp_algo_util(StateUtil, AlgoUtil),
+    abp_algo_util(StateUtil, 4, AlgoUtil),
     play(Board, human, Players, StateUtil, IOUtil, AlgoUtil, Winner).
