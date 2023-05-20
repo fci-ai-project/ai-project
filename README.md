@@ -7,17 +7,18 @@
 - Ali Esmat Ahmed Orfy - 20206123
 
 # GitHub repository
+
 https://github.com/fci-ai-project/ai-project
 
-# Linkedin post
-https://www.linkedin.com/posts/ahmed-wael-12318021a_fci-ai-project-activity-7065639801042968576--bED
-
 # Running
+
 Consult `main.pl`
+
 ```bash
 swipl -s main.pl
 ```
 
-# Experience article, AI screenshots, performance graphs
-https://fci-ai-project.github.io
+# Hyper Links
 
+- [Experience article, Github Copilot screenshots, performance graphs](https://fci-ai-project.github.io)
+- [LinkedIn post](https://www.linkedin.com/posts/ahmed-wael-12318021a_fci-ai-project-activity-7065639801042968576--bED)
