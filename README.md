@@ -9,6 +9,9 @@
 # GitHub repository
 https://github.com/fci-ai-project/ai-project
 
+# Linkedin post
+https://www.linkedin.com/posts/ahmed-wael-12318021a_fci-ai-project-activity-7065639801042968576--bED
+
 # Running
 Consult `main.pl`
 ```bash
