@@ -1,0 +1,199 @@
+- 8x8 board, winning factor 5, max-plies 3, human red, human starts
+    - Minimax
+        3
+        [3,12]
+        % 42,280,716 inferences, 2.582 CPU in 2.584 seconds (100% CPU, 16372277 Lips)
+        2
+        [3,20]
+        % 42,519,134 inferences, 2.614 CPU in 2.616 seconds (100% CPU, 16263438 Lips)
+        4
+        [1,14]
+        % 40,517,478 inferences, 2.492 CPU in 2.493 seconds (100% CPU, 16261343 Lips)
+        3
+        [3,21]
+        % 41,944,727 inferences, 2.535 CPU in 2.536 seconds (100% CPU, 16546509 Lips)
+        6
+        [5,26]
+        % 35,131,146 inferences, 2.240 CPU in 2.242 seconds (100% CPU, 15681333 Lips)
+        5
+        [3,31]
+        % 43,228,206 inferences, 2.611 CPU in 2.612 seconds (100% CPU, 16556374 Lips)
+        1
+        [5,35]
+        % 43,201,541 inferences, 2.709 CPU in 2.711 seconds (100% CPU, 15946292 Lips)
+        0
+        [3,40]
+        % 43,548,639 inferences, 2.547 CPU in 2.548 seconds (100% CPU, 17099391 Lips)
+        3
+        [1,42]
+        % 26,017,156 inferences, 1.693 CPU in 1.694 seconds (100% CPU, 15370978 Lips)
+        1
+        [1,42]
+        % 26,087,886 inferences, 1.537 CPU in 1.537 seconds (100% CPU, 16977556 Lips)
+        5
+        [5,45]
+        % 26,167,773 inferences, 1.758 CPU in 1.759 seconds (100% CPU, 14885278 Lips)
+        7
+        [5,48]
+        % 26,390,374 inferences, 1.548 CPU in 1.549 seconds (100% CPU, 17047442 Lips)
+        7
+        [5,51]
+        % 26,298,711 inferences, 1.732 CPU in 1.733 seconds (100% CPU, 15186519 Lips)
+        5
+        [1,54]
+        % 14,576,416 inferences, 0.863 CPU in 0.865 seconds (100% CPU, 16882049 Lips)
+        1
+        [7,51]
+        % 12,737,689 inferences, 0.808 CPU in 0.809 seconds (100% CPU, 15772364 Lips)
+        7
+        [0,52]
+        % 12,775,972 inferences, 0.760 CPU in 0.760 seconds (100% CPU, 16815814 Lips)
+        1
+        [0,55]
+        % 7,210,814 inferences, 0.437 CPU in 0.437 seconds (100% CPU, 16502059 Lips)
+        0
+        [2,51]
+        % 7,223,652 inferences, 0.437 CPU in 0.437 seconds (100% CPU, 16539710 Lips)
+        7
+        [4,54]
+        % 7,087,868 inferences, 0.430 CPU in 0.430 seconds (100% CPU, 16477585 Lips)
+        4
+        [2,1000000]
+        % 4,429,841 inferences, 0.274 CPU in 0.274 seconds (100% CPU, 16191634 Lips)
+        2
+        [4,1000000]
+        % 2,362,921 inferences, 0.153 CPU in 0.153 seconds (100% CPU, 15479107 Lips)
+
+    - abp
+        3
+        [3,12]
+        % 5,716,313 inferences, 0.371 CPU in 0.371 seconds (100% CPU, 15412669 Lips)
+        2
+        [3,20]
+        % 7,166,306 inferences, 0.457 CPU in 0.457 seconds (100% CPU, 15681712 Lips)
+        4
+        [1,14]
+        % 6,137,486 inferences, 0.398 CPU in 0.398 seconds (100% CPU, 15428716 Lips)
+        3
+        [3,21]
+        % 12,046,441 inferences, 0.769 CPU in 0.769 seconds (100% CPU, 15668989 Lips)
+        6
+        [5,26]
+        % 14,533,102 inferences, 0.910 CPU in 0.911 seconds (100% CPU, 15967928 Lips)
+        5
+        [3,31]
+        % 8,748,823 inferences, 0.531 CPU in 0.532 seconds (100% CPU, 16462114 Lips)
+        1
+        [5,35]
+        % 10,596,873 inferences, 0.691 CPU in 0.691 seconds (100% CPU, 15335840 Lips)
+        0
+        [3,40]
+        % 10,254,576 inferences, 0.631 CPU in 0.631 seconds (100% CPU, 16257631 Lips)
+        3
+        [1,42]
+        % 7,135,330 inferences, 0.455 CPU in 0.456 seconds (100% CPU, 15667787 Lips)
+        1
+        [1,42]
+        % 7,452,837 inferences, 0.536 CPU in 0.536 seconds (100% CPU, 13909628 Lips)
+        5
+        [5,45]
+        % 10,051,487 inferences, 0.606 CPU in 0.606 seconds (100% CPU, 16585881 Lips)
+        7
+        [5,48]
+        % 7,972,577 inferences, 0.482 CPU in 0.483 seconds (100% CPU, 16533441 Lips)
+        7
+        [5,51]
+        % 9,303,089 inferences, 0.670 CPU in 0.670 seconds (100% CPU, 13889591 Lips)
+        5
+        [1,54]
+        % 5,924,528 inferences, 0.363 CPU in 0.363 seconds (100% CPU, 16326631 Lips)
+        1
+        [7,51]
+        % 4,856,939 inferences, 0.300 CPU in 0.300 seconds (100% CPU, 16187578 Lips)
+        7
+        [0,52]
+        % 4,255,380 inferences, 0.269 CPU in 0.269 seconds (100% CPU, 15841817 Lips)
+        1
+        [0,55]
+        % 1,995,347 inferences, 0.132 CPU in 0.132 seconds (100% CPU, 15102631 Lips)
+        0
+        [2,51]
+        % 2,682,877 inferences, 0.272 CPU in 0.272 seconds (100% CPU, 9868108 Lips)
+        7
+        [4,54]
+        % 1,928,964 inferences, 0.130 CPU in 0.130 seconds (100% CPU, 14888749 Lips)
+        4
+        [2,1000000]
+        % 839,921 inferences, 0.066 CPU in 0.066 seconds (100% CPU, 12716510 Lips)
+        2
+        [4,1000000]
+        % 498,434 inferences, 0.045 CPU in 0.045 seconds (100% CPU, 11064449 Lips)
+
+- 6x7 board, winning factor 4, max-plies 4, human blue, computer starts
+    - minimax
+        [3,20]
+        % 117,311,107 inferences, 7.362 CPU in 7.366 seconds (100% CPU, 15935426 Lips)
+        4
+        [3,22]
+        % 116,841,765 inferences, 7.302 CPU in 7.308 seconds (100% CPU, 16001523 Lips)
+        2
+        [3,26]
+        % 114,222,392 inferences, 7.188 CPU in 7.192 seconds (100% CPU, 15890299 Lips)
+        3
+        [3,27]
+        % 116,874,628 inferences, 7.416 CPU in 7.420 seconds (100% CPU, 15760744 Lips)
+        0
+        [2,31]
+        % 102,368,740 inferences, 6.496 CPU in 6.500 seconds (100% CPU, 15757531 Lips)
+        2
+        [4,35]
+        % 89,958,939 inferences, 5.656 CPU in 5.659 seconds (100% CPU, 15903847 Lips)
+        4
+        [0,1000000]
+        % 67,335,004 inferences, 4.023 CPU in 4.026 seconds (100% CPU, 16735774 Lips)
+        6
+        [0,1000000]
+        % 62,683,419 inferences, 4.098 CPU in 4.100 seconds (100% CPU, 15296662 Lips)
+        2
+        [0,1000000]
+        % 60,393,246 inferences, 3.973 CPU in 3.975 seconds (100% CPU, 15201688 Lips)
+        0
+        [4,1000000]
+        % 50,379,805 inferences, 2.997 CPU in 2.999 seconds (100% CPU, 16809908 Lips)
+        2
+        [1,1000000]
+        % 23,534,881 inferences, 1.513 CPU in 1.514 seconds (100% CPU, 15551770 Lips)
+
+    - abp
+        [3,20]
+        % 14,071,311 inferences, 0.928 CPU in 0.929 seconds (100% CPU, 15160285 Lips)
+        4
+        [3,22]
+        % 14,124,223 inferences, 0.900 CPU in 0.902 seconds (100% CPU, 15685246 Lips)
+        2
+        [3,26]
+        % 20,698,596 inferences, 1.308 CPU in 1.309 seconds (100% CPU, 15824220 Lips)
+        3
+        [3,27]
+        % 17,067,110 inferences, 1.160 CPU in 1.161 seconds (100% CPU, 14708443 Lips)
+        0
+        [2,31]
+        % 14,221,267 inferences, 0.883 CPU in 0.884 seconds (100% CPU, 16103311 Lips)
+        2
+        [4,35]
+        % 12,329,467 inferences, 0.871 CPU in 0.872 seconds (100% CPU, 14155079 Lips)
+        4
+        [0,1000000]
+        % 4,751,373 inferences, 0.299 CPU in 0.300 seconds (100% CPU, 15864650 Lips)
+        6
+        [0,1000000]
+        % 4,015,472 inferences, 0.257 CPU in 0.257 seconds (100% CPU, 15642725 Lips)
+        2
+        [0,1000000]
+        % 2,491,188 inferences, 0.165 CPU in 0.165 seconds (100% CPU, 15078718 Lips)
+        0
+        [4,1000000]
+        % 3,954,875 inferences, 0.257 CPU in 0.257 seconds (100% CPU, 15392854 Lips)
+        2
+        [1,1000000]
+        % 823,608 inferences, 0.067 CPU in 0.067 seconds (100% CPU, 12363149 Lips)
